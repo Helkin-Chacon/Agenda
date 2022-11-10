@@ -1,0 +1,100 @@
+﻿@page "/registrar"
+@using Agenda.Assembly.Client.Services
+@using Agenda.Assembly.Shared
+@inject IAgendaService AgendaServicios
+@inject NavigationManager NavigationManager
+@if (datos == null)
+{
+    <p><em>Cargando Componentes...</em></p>
+}
+
+else
+{
+    <EditForm Model="datos" OnValidSubmit="Guardar">
+        <div class="card">
+            <h5 class="card-header">formulario de Registro</h5>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="">Nombre completo: </label>
+
+                            <InputText class="form-control" @bind-Value="@datos.Nombre"></InputText>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 mb-3">
+                            <label for="">Dirección: </label>
+
+                            <InputText class="form-control" @bind-Value="@datos.Direccion"></InputText>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 mb-3">
+                            <label for="">Telefono: </label>
+
+                            <InputText class="form-control" @bind-Value="@datos.Telefono"></InputText>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 mb-3">
+                            <label for="">Email: </label>
+
+                            <InputText class="form-control" @bind-Value="@datos.Email"></InputText>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4 mb-3">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+
+                            <input type="submit" class="btn btn-success"
+                               value="Guardar" />
+                            <input type="button" class="btn btn-secondary"
+                               value="Cancelar" @onclick="inicio" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    public Agendax datos;
+
+    [Parameter]
+    public int id { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        if (id == 0)
+            datos = new Agendax();
+        else
+            datos = await AgendaServicios.Buscar(id);
+    }
+    protected async Task Guardar()
+    {
+        await AgendaServicios.Guardar_dato(datos);
+        inicio();
+    }
+    private void inicio()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

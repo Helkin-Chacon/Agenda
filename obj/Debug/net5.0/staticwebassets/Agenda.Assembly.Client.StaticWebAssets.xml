@@ -1,0 +1,4 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="C:\Users\HELKIN\source\repos\Agenda.Assembly\Agenda.Assembly\Client\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="C:\Users\HELKIN\source\repos\Agenda.Assembly\Agenda.Assembly\Client\obj\Debug\net5.0\scopedcss\bundle\" />
+</StaticWebAssets>
